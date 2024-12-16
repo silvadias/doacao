@@ -1,0 +1,146 @@
+
+# BDD para Aplicativo de Doações para Igrejas
+
+---
+
+## 1. Cenário: Doação de dízimo e contribuições gerais
+
+### Objetivo:
+Permitir que os clientes façam doações para sua igreja ou outras igrejas, com a possibilidade de configurar se a doação será anônima ou identificada.
+
+### Cenário: Doação configurável via diversos métodos de pagamento
+```gherkin
+Dado que sou um cliente cadastrado no aplicativo
+E desejo fazer uma doação para minha igreja ou outra igreja cadastrada na plataforma
+Quando seleciono a igreja destinatária
+E insiro o valor da doação
+E escolho o método de pagamento (PIX, boleto, cartão de crédito, dinheiro ou outro)
+E marco ou desmarco a opção "Doação Anônima"
+Então a doação deve ser processada com sucesso
+E a igreja deve ser notificada com os detalhes da transação, respeitando a configuração de anonimato
+```
+
+### Cenário: Doação para um evento específico ou vaquinha
+```gherkin
+Dado que sou um cliente cadastrado no aplicativo
+E desejo contribuir para um evento ou vaquinha (ex.: retiro ou festa)
+Quando seleciono o evento desejado na lista de vaquinhas ou eventos disponíveis
+E insiro o valor da contribuição
+E escolho o método de pagamento
+E marco ou desmarco a opção "Doação Anônima"
+Então a doação deve ser registrada para o evento selecionado
+E a igreja deve ser notificada da transação, respeitando a configuração de anonimato
+```
+
+---
+
+## 2. Cenário: Relatórios detalhados para igrejas
+
+### Objetivo:
+Oferecer relatórios completos e organizados para as igrejas cadastradas, incluindo a identificação de doadores anônimos e não anônimos.
+
+### Cenário: Visualização detalhada de doações no relatório
+```gherkin
+Dado que sou uma igreja cadastrada no aplicativo
+E recebo doações de clientes pela plataforma
+Quando acesso a seção de relatórios no aplicativo
+Então devo visualizar uma lista detalhada de todas as doações realizadas
+E cada doação deve incluir:
+  - Valor doado
+  - Método de pagamento utilizado
+  - Identificação do doador ou indicação de "Anônimo"
+  - Data e hora da transação
+```
+
+### Cenário: Filtragem de doações anônimas e não anônimas
+```gherkin
+Dado que sou uma igreja cadastrada no aplicativo
+E desejo acessar informações específicas no relatório
+Quando aplico um filtro de doações por tipo (anônimas ou identificadas)
+Então o sistema deve mostrar apenas as doações correspondentes ao filtro selecionado
+```
+
+### Cenário: Controle de vaquinhas e eventos
+```gherkin
+Dado que sou uma igreja cadastrada no aplicativo
+E organizo vaquinhas ou eventos para arrecadação de recursos
+Quando acesso o relatório de um evento específico
+Então devo visualizar uma lista detalhada de todas as contribuições realizadas para o evento
+E cada contribuição deve incluir:
+  - Valor doado
+  - Identificação do doador ou indicação de "Anônimo"
+  - Status de pagamento (pago ou pendente)
+  - Observações personalizadas adicionadas pelo doador (se houver)
+```
+
+---
+
+## 3. Cenário: Sorteios envolvendo doadores (anônimos ou não)
+
+### Objetivo:
+Permitir que as igrejas realizem sorteios para doadores, incluindo doações anônimas, e que os vencedores possam receber a premiação pelo app ou pelos correios.
+
+### Cenário: Realizar sorteio para um evento ou vaquinha
+```gherkin
+Dado que sou uma igreja cadastrada no aplicativo
+E organizei uma vaquinha ou evento com premiação por sorteio
+Quando inicio o sorteio na plataforma
+Então o sistema deve incluir todos os doadores, anônimos ou não, na lista de participantes
+E deve sortear um ou mais vencedores de forma aleatória
+```
+
+### Cenário: Notificação de premiação para doadores
+```gherkin
+Dado que sou um cliente que realizou uma doação para um evento ou vaquinha com sorteio
+E fui sorteado como vencedor
+Quando a igreja confirma o resultado do sorteio
+Então devo ser notificado pelo aplicativo com os detalhes da premiação
+E, se minha doação for anônima, a igreja não deve visualizar meu nome no relatório
+```
+
+### Cenário: Repasses de premiação para doadores vencedores
+```gherkin
+Dado que sou uma igreja cadastrada no aplicativo
+E realizei um sorteio para doadores de um evento ou vaquinha
+E um vencedor foi definido, anônimo ou não
+Quando acesso a funcionalidade de repasse no aplicativo
+Então devo ser capaz de transferir a premiação diretamente para o vencedor, pelo app ou por outro método definido
+```
+
+---
+
+## 4. Cenário: Cadastro e extensibilidade da plataforma
+
+### Objetivo:
+Garantir que o sistema atenda às necessidades futuras das igrejas e clientes.
+
+### Cenário: Cadastro de igrejas e validação de dados
+```gherkin
+Dado que sou um representante de uma igreja interessada em utilizar a plataforma
+Quando realizo o cadastro no aplicativo
+Então o sistema deve solicitar os seguintes dados obrigatórios:
+  - Nome da igreja
+  - CNPJ ou registro equivalente
+  - Dados bancários para recebimento de doações
+  - Informações de contato do responsável
+```
+
+### Cenário: Inclusão de novos métodos de pagamento
+```gherkin
+Dado que sou um cliente utilizando o aplicativo
+E desejo realizar uma doação por um método de pagamento ainda não suportado
+Quando um novo método de pagamento é implementado na plataforma
+Então o sistema deve permitir que eu utilize este método nas próximas doações
+```
+
+---
+
+## Considerações Adicionais:
+1. **Privacidade e LGPD:**
+   Todos os dados pessoais, tanto de doadores quanto de igrejas, devem ser protegidos de acordo com a legislação vigente.
+
+2. **Extensibilidade do Sorteio:**
+   Permitir que a igreja configure quantos vencedores serão sorteados e as regras associadas (ex.: premiação por categorias).
+
+3. **Comunicação entre igrejas e doadores:**
+   Oferecer um canal no app para que a igreja possa agradecer os doadores, mesmo para doações anônimas, sem revelar identidades.
